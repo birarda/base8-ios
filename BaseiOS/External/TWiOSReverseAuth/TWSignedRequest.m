@@ -32,9 +32,6 @@
 #define TW_HTTP_METHOD_DELETE @"DELETE"
 #define TW_HTTP_HEADER_AUTHORIZATION @"Authorization"
 
-#define kTWConsumerKey @"nBeBItOYtfBGlIuC1I3Daw"
-#define kTWConsumerSecret @"kuUVGqaHQ9kIAZzMWdP2QFJK56DE6kxSqRa5x04CQEk"
-
 @interface TWSignedRequest()
 {
     NSURL *_url;
@@ -126,17 +123,16 @@
 // OBFUSCATE YOUR KEYS!
 + (NSString *)consumerKey
 {
-    NSAssert([kTWConsumerKey length] > 0,
-             @"You must enter your consumer key in Build Settings.");
-    return kTWConsumerKey;
+    NSAssert([kTwitterCounsumerKey length] > 0,
+    @"You must enter your consumer key in Build Settings.");
+    return kTwitterCounsumerKey;
 }
 
 // OBFUSCATE YOUR KEYS!
 + (NSString *)consumerSecret
 {
-    NSAssert([kTWConsumerSecret length] > 0,
-             @"You must enter your consumer secret in Build Settings.");
-    return kTWConsumerSecret;
+    NSAssert([kTwitterCounsumerSecret length] > 0,
+    @"You must enter your consumer secret in Build Settings.");
+    return kTwitterCounsumerSecret;
 }
-
 @end

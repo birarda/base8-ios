@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import "AppUserDefaultsHandler.h"
-
 // define a way to quickly grab and set NSUserDefaults
 #define DEFAULTS(type, key) ([[NSUserDefaults standardUserDefaults] type##ForKey:key])
 #define SET_DEFAULTS(Type, key, val) do {\
@@ -26,9 +24,27 @@ NSString* const kCurrentCustomer = @"loggedCustomer";
     
     // store it in user defaults
     SET_DEFAULTS(Object, kCurrentCustomer, encodedUser);
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateChanged" object:nil];
 }
+
++ (void)getCustomerBalance
+{
+    if (AppUserDefaultsHandler.currentCustomer) {
+        [ApiHelper getBalance:^(id response, NSError *error) {
+            if (!error) {
+                double balance = [response[@"balance"] doubleValue];
+                if (AppUserDefaultsHandler.currentCustomer.balance != balance) {
+
+                    Customer *customer = AppUserDefaultsHandler.currentCustomer;
+                    customer.balance = balance;
+                    [AppUserDefaultsHandler setCurrentCustomer:customer];
+                }
+            }
+        }];
+    }
+}
+
 
 + (Customer *)currentCustomer
 {

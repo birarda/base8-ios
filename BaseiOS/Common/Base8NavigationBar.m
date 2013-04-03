@@ -10,15 +10,6 @@
 
 @implementation Base8NavigationBar
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (void)drawRect:(CGRect)rect
 {
 	UIImage *image = [UIImage imageNamed:@"twitter.png"];

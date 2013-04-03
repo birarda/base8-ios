@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface AppUserDefaultsHandler : NSObject
 
-+(void)setCurrentCustomer:(Customer *)currentCustomer;
 +(Customer *)currentCustomer;
+
++(void)setCurrentCustomer:(Customer *)currentCustomer;
++(void)getCustomerBalance;
 
 @end

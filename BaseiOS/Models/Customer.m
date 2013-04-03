@@ -6,22 +6,19 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-#import "Customer.h"
-
 @implementation Customer
 -(id)initFromDictionary:(NSDictionary *)userDict
 {
     self = [super init];
     if (self) {
-        
-        self.customerId = [userDict objectForKey:@"id"];
-        self.twitterId = [userDict objectForKey:@"twitterId"];
-        self.twitterName = [userDict objectForKey:@"twitterName"];
-        self.nickname = [userDict objectForKey:@"nickname"];
-        self.balance = [userDict objectForKey:@"balance"];
-        self.joinDate = [userDict objectForKey:@"joinDate"];
-        self.oauthToken = [userDict objectForKey:@"oauthToken"];
-        self.oauthSecret = [userDict objectForKey:@"oauthSecret"];
+        self.customerId = userDict[@"id"];
+        self.twitterId = userDict[@"twitterId"];
+        self.twitterName = userDict[@"twitterName"];
+        self.nickname = userDict[@"nickname"];
+        self.balance = [userDict[@"balance"] doubleValue];
+        self.joinDate = userDict[@"joinDate"];
+        self.oauthToken = userDict[@"oauthToken"];
+        self.oauthSecret = userDict[@"oauthSecret"];
     }
     return self;
 }
@@ -30,14 +27,20 @@
 {
     self = [super init];
     if (self) {
-        self.customerId = [decoder decodeObjectForKey:@"id"];
-        self.twitterId = [decoder decodeObjectForKey:@"twitterId"];
-        self.twitterName = [decoder decodeObjectForKey:@"twitterName"];
-        self.nickname = [decoder decodeObjectForKey:@"nickname"];
-        self.balance = [decoder decodeObjectForKey:@"balance"];
-        self.joinDate = [decoder decodeObjectForKey:@"joinDate"];
-        self.oauthToken = [decoder decodeObjectForKey:@"oauthToken"];
-        self.oauthSecret = [decoder decodeObjectForKey:@"oauthSecret"];
+        @try {
+            
+            self.customerId = [decoder decodeObjectForKey:@"id"];
+            self.twitterId = [decoder decodeObjectForKey:@"twitterId"];
+            self.twitterName = [decoder decodeObjectForKey:@"twitterName"];
+            self.nickname = [decoder decodeObjectForKey:@"nickname"];
+            self.joinDate = [decoder decodeObjectForKey:@"joinDate"];
+            self.oauthToken = [decoder decodeObjectForKey:@"oauthToken"];
+            self.oauthSecret = [decoder decodeObjectForKey:@"oauthSecret"];
+            self.balance = [decoder decodeDoubleForKey:@"balance"];
+            
+        } @catch (NSException *e) {
+            NSLog(@"Exception: %@", e);
+        }
     }
     return self;
 }
@@ -48,7 +51,7 @@
     [encoder encodeObject:self.twitterId forKey:@"twitterId"];
     [encoder encodeObject:self.twitterName forKey:@"twitterName"];
     [encoder encodeObject:self.nickname forKey:@"nickname"];
-    [encoder encodeObject:self.balance forKey:@"balance"];
+    [encoder encodeDouble:self.balance forKey:@"balance"];
     [encoder encodeObject:self.joinDate forKey:@"joinDate"];
     [encoder encodeObject:self.oauthToken forKey:@"oauthToken"];
     [encoder encodeObject:self.oauthSecret forKey:@"oauthSecret"];

@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		6503856A235742DFBC0B28B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A98F6DB6B0B4EF48D6F0687 /* libPods.a */; settings = {}; };
+		E401902316FA51C20089FBD3 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902216FA51C20089FBD3 /* Job.m */; };
+		E401902916FB81E80089FBD3 /* UdpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902816FB81E80089FBD3 /* UdpTest.m */; };
+		E4048C8E16F92101008E409D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4048C8B16F92101008E409D /* GCDAsyncSocket.m */; };
+		E4048C8F16F92101008E409D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */; };
+		E4048C9116F92371008E409D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4048C9016F92371008E409D /* Security.framework */; };
+		E4048C9216F923BB008E409D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4AD0A16EBE31500BC406E /* CFNetwork.framework */; };
 		E40854D316ECA413003D3E50 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E40854C916ECA413003D3E50 /* TWAPIManager.m */; };
 		E40854D416ECA413003D3E50 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E40854CB16ECA413003D3E50 /* TWSignedRequest.m */; };
 		E40854D516ECA413003D3E50 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = E40854CE16ECA413003D3E50 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E40854D616ECA413003D3E50 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = E40854D016ECA413003D3E50 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E40854D716ECA413003D3E50 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = E40854D216ECA413003D3E50 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E40854D916ECA914003D3E50 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40854D816ECA914003D3E50 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E412BBEF16F6576300E1852C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4AD0E16EBF00900BC406E /* CoreLocation.framework */; };
 		E41E0DE716EBA34E00310D34 /* TwitterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41E0DE616EBA34E00310D34 /* TwitterLoginViewController.m */; };
 		E47EE91116EE867E00F174C9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4AD0816EBE09D00BC406E /* MobileCoreServices.framework */; };
 		E47EE91216EE868800F174C9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4AD0616EBE08B00BC406E /* SystemConfiguration.framework */; };
@@ -29,6 +36,10 @@
 		E4A0A50516EB28AE00490F08 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A50416EB28AE00490F08 /* button.png */; };
 		E4A0A50716EB297500490F08 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A0A50616EB297500490F08 /* button@2x.png */; };
 		E4A0A50A16EB312300490F08 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A0A50916EB312300490F08 /* AppConstants.m */; };
+		E4C821F416FBC3ED00E7C7ED /* UploadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C821F316FBC3ED00E7C7ED /* UploadTest.m */; };
+		E4E76B5C16FE2BC4002D054D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E76B5B16FE2BC4002D054D /* QuartzCore.framework */; };
+		E4EADB9C16FBACDD00F99C12 /* DownloadTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EADB9B16FBACDD00F99C12 /* DownloadTest.m */; };
+		E4EADB9F16FBAD0600F99C12 /* Base8Test.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EADB9E16FBAD0600F99C12 /* Base8Test.m */; };
 		E4EEC52F16ED5956009D30BC /* ApiHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEC52E16ED5956009D30BC /* ApiHelper.m */; };
 		E4EEC53216ED5E1D009D30BC /* APPUserDefaultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EEC53116ED5E1D009D30BC /* APPUserDefaultsHandler.m */; };
 		E4F4AD0316EBE07400BC406E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4AD0216EBE07400BC406E /* Accounts.framework */; };
@@ -54,6 +65,15 @@
 /* Begin PBXFileReference section */
 		2A98F6DB6B0B4EF48D6F0687 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCADDF4A62B45A58EB60DD1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		E401902116FA51C20089FBD3 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		E401902216FA51C20089FBD3 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
+		E401902716FB81E80089FBD3 /* UdpTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpTest.h; sourceTree = "<group>"; };
+		E401902816FB81E80089FBD3 /* UdpTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpTest.m; sourceTree = "<group>"; };
+		E4048C8A16F92101008E409D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		E4048C8B16F92101008E409D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		E4048C8C16F92101008E409D /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		E4048C9016F92371008E409D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E40854C816ECA413003D3E50 /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAPIManager.h; sourceTree = "<group>"; };
 		E40854C916ECA413003D3E50 /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
 		E40854CA16ECA413003D3E50 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
@@ -84,6 +104,15 @@
 		E4A0A50616EB297500490F08 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
 		E4A0A50816EB312300490F08 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
 		E4A0A50916EB312300490F08 /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConstants.m; sourceTree = "<group>"; };
+		E4C821F216FBC3ED00E7C7ED /* UploadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTest.h; sourceTree = "<group>"; };
+		E4C821F316FBC3ED00E7C7ED /* UploadTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadTest.m; sourceTree = "<group>"; };
+		E4E76B5916FE2B92002D054D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E4E76B5B16FE2BC4002D054D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E4EADB9A16FBACDD00F99C12 /* DownloadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTest.h; sourceTree = "<group>"; };
+		E4EADB9B16FBACDD00F99C12 /* DownloadTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTest.m; sourceTree = "<group>"; };
+		E4EADB9D16FBAD0600F99C12 /* Base8Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base8Test.h; sourceTree = "<group>"; };
+		E4EADB9E16FBAD0600F99C12 /* Base8Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base8Test.m; sourceTree = "<group>"; };
+		E4EC665316F6F8A6003103B2 /* AppMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacros.h; sourceTree = "<group>"; };
 		E4EEC52D16ED5956009D30BC /* ApiHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiHelper.h; sourceTree = "<group>"; };
 		E4EEC52E16ED5956009D30BC /* ApiHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiHelper.m; sourceTree = "<group>"; };
 		E4EEC53016ED5E1D009D30BC /* APPUserDefaultsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPUserDefaultsHandler.h; sourceTree = "<group>"; };
@@ -120,6 +149,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4E76B5C16FE2BC4002D054D /* QuartzCore.framework in Frameworks */,
+				E4048C9216F923BB008E409D /* CFNetwork.framework in Frameworks */,
+				E4048C9116F92371008E409D /* Security.framework in Frameworks */,
+				E412BBEF16F6576300E1852C /* CoreLocation.framework in Frameworks */,
 				E47EE91216EE868800F174C9 /* SystemConfiguration.framework in Frameworks */,
 				E47EE91116EE867E00F174C9 /* MobileCoreServices.framework in Frameworks */,
 				E4F4AD0316EBE07400BC406E /* Accounts.framework in Frameworks */,
@@ -137,6 +170,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E401902016FA517C0089FBD3 /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				E401902116FA51C20089FBD3 /* Job.h */,
+				E401902216FA51C20089FBD3 /* Job.m */,
+				E401902716FB81E80089FBD3 /* UdpTest.h */,
+				E401902816FB81E80089FBD3 /* UdpTest.m */,
+				E4EADB9A16FBACDD00F99C12 /* DownloadTest.h */,
+				E4EADB9B16FBACDD00F99C12 /* DownloadTest.m */,
+				E4EADB9D16FBAD0600F99C12 /* Base8Test.h */,
+				E4EADB9E16FBAD0600F99C12 /* Base8Test.m */,
+				E4C821F216FBC3ED00E7C7ED /* UploadTest.h */,
+				E4C821F316FBC3ED00E7C7ED /* UploadTest.m */,
+			);
+			path = Job;
+			sourceTree = "<group>";
+		};
+		E4048C8916F92101008E409D /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				E4048C8A16F92101008E409D /* GCDAsyncSocket.h */,
+				E4048C8B16F92101008E409D /* GCDAsyncSocket.m */,
+				E4048C8C16F92101008E409D /* GCDAsyncUdpSocket.h */,
+				E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
 		E40854C716ECA413003D3E50 /* TWiOSReverseAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +225,7 @@
 		E41E0DC016EB8AD100310D34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				E4048C8916F92101008E409D /* CocoaAsyncSocket */,
 				E40854CC16ECA413003D3E50 /* ABOAuthCore */,
 				E40854C716ECA413003D3E50 /* TWiOSReverseAuth */,
 			);
@@ -192,6 +254,9 @@
 		E4A0A4D416EA92F300490F08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4E76B5B16FE2BC4002D054D /* QuartzCore.framework */,
+				E4E76B5916FE2B92002D054D /* CoreMedia.framework */,
+				E4048C9016F92371008E409D /* Security.framework */,
 				E4F4AD0216EBE07400BC406E /* Accounts.framework */,
 				E4F4AD0A16EBE31500BC406E /* CFNetwork.framework */,
 				E4F4AD0C16EBEFF600BC406E /* CoreData.framework */,
@@ -219,6 +284,7 @@
 				E4F7D36316ED4B2A002D51FF /* Common */,
 				E41E0DC016EB8AD100310D34 /* External */,
 				E4A0A4FF16EB240100490F08 /* images */,
+				E401902016FA517C0089FBD3 /* Job */,
 				E4A0A4ED16EA92F300490F08 /* MainStoryboard_iPhone.storyboard */,
 				E4F7D35516ED1CDF002D51FF /* MainViewController.h */,
 				E4F7D35616ED1CE0002D51FF /* MainViewController.m */,
@@ -281,6 +347,7 @@
 				E4F7D36516ED4B5B002D51FF /* Base8NavigationBar.m */,
 				E4EEC53016ED5E1D009D30BC /* APPUserDefaultsHandler.h */,
 				E4EEC53116ED5E1D009D30BC /* APPUserDefaultsHandler.m */,
+				E4EC665316F6F8A6003103B2 /* AppMacros.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -398,6 +465,13 @@
 				E4F7D36616ED4B5B002D51FF /* Base8NavigationBar.m in Sources */,
 				E4EEC52F16ED5956009D30BC /* ApiHelper.m in Sources */,
 				E4EEC53216ED5E1D009D30BC /* APPUserDefaultsHandler.m in Sources */,
+				E4048C8E16F92101008E409D /* GCDAsyncSocket.m in Sources */,
+				E4048C8F16F92101008E409D /* GCDAsyncUdpSocket.m in Sources */,
+				E401902316FA51C20089FBD3 /* Job.m in Sources */,
+				E401902916FB81E80089FBD3 /* UdpTest.m in Sources */,
+				E4EADB9C16FBACDD00F99C12 /* DownloadTest.m in Sources */,
+				E4EADB9F16FBAD0600F99C12 /* Base8Test.m in Sources */,
+				E4C821F416FBC3ED00E7C7ED /* UploadTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,15 +8,13 @@
 
 #import "TwitterLoginViewController.h"
 #import "TWAPIManager.h"
-#import "MainViewController.h"
 
 @interface TwitterLoginViewController ()
 
-@property (nonatomic, strong) ACAccountStore *accountStore;
-@property (nonatomic, strong) NSArray *accounts;
+@property (strong, nonatomic) ACAccountStore *accountStore;
+@property (strong, nonatomic) NSArray *accounts;
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
-@property (weak, nonatomic) IBOutlet UIView *viewLogin;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityLogin;
 
 @end
@@ -38,7 +36,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != (actionSheet.numberOfButtons - 1)) {
-        [self performReverseAuthForAccount:self.accounts[buttonIndex]];
+        [self performReverseAuthForAccount:self.accounts[(NSUInteger) buttonIndex]];
     }
 }
 
@@ -59,6 +57,17 @@
                                                                                            encoding:NSUTF8StringEncoding];
                                              
                                              NSArray *parts = [responseStr componentsSeparatedByString:@"&"];
+                                             
+                                             if (parts.count == 0) {
+                                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter authorization error"
+                                                                                                 message:@"Please check Twitter settings on your device."
+                                                                                                delegate:nil
+                                                                                       cancelButtonTitle:@"OK"
+                                                                                       otherButtonTitles:nil];
+                                                 [alert show];
+                                                 return;
+                                             }
+                                             
                                              NSMutableDictionary *twitterData = [[NSMutableDictionary alloc] init];
                                              
                                              for (NSString *part in parts) {
@@ -71,21 +80,20 @@
                                              }
                                              
                                              [ApiHelper signInWithTwitterData:twitterData
-                                                                andCompletion:^(NSDictionary *json, NSError *error) {
-                                                                  
-                                                                  
+                                                                andCompletion:^(NSDictionary *json, NSError *signInError) {
+
                                                                   self.buttonLogin.hidden = NO;
                                                                   [self.activityLogin stopAnimating];
-                                                                  if (!error) {
+                                                                  if (!signInError) {
                                                                       
-                                                                      NSDictionary *customer = [json objectForKey:@"customer"];
+                                                                      NSDictionary *customer = json[@"customer"];
                                                                       Customer *currentCustomer = [[Customer alloc] initFromDictionary:customer];
                                                                       [AppUserDefaultsHandler setCurrentCustomer:currentCustomer];
                                                                       [self dismissModalViewControllerAnimated:YES];
                                                                       
                                                                   } else {
                                                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Signin Error"
-                                                                                                                      message:error.localizedDescription
+                                                                                                                      message:signInError.localizedDescription
                                                                                                                      delegate:nil
                                                                                                             cancelButtonTitle:@"OK"
                                                                                                             otherButtonTitles:nil];
