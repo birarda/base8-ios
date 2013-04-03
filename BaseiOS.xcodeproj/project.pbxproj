@@ -10,8 +10,6 @@
 		6503856A235742DFBC0B28B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A98F6DB6B0B4EF48D6F0687 /* libPods.a */; settings = {}; };
 		E401902316FA51C20089FBD3 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902216FA51C20089FBD3 /* Job.m */; };
 		E401902916FB81E80089FBD3 /* UdpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902816FB81E80089FBD3 /* UdpTest.m */; };
-		E4048C8E16F92101008E409D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4048C8B16F92101008E409D /* GCDAsyncSocket.m */; };
-		E4048C8F16F92101008E409D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */; };
 		E4048C9116F92371008E409D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4048C9016F92371008E409D /* Security.framework */; };
 		E4048C9216F923BB008E409D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4AD0A16EBE31500BC406E /* CFNetwork.framework */; };
 		E40854D316ECA413003D3E50 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E40854C916ECA413003D3E50 /* TWAPIManager.m */; };
@@ -69,10 +67,6 @@
 		E401902216FA51C20089FBD3 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		E401902716FB81E80089FBD3 /* UdpTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpTest.h; sourceTree = "<group>"; };
 		E401902816FB81E80089FBD3 /* UdpTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpTest.m; sourceTree = "<group>"; };
-		E4048C8A16F92101008E409D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		E4048C8B16F92101008E409D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
-		E4048C8C16F92101008E409D /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		E4048C9016F92371008E409D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E40854C816ECA413003D3E50 /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAPIManager.h; sourceTree = "<group>"; };
 		E40854C916ECA413003D3E50 /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
@@ -187,17 +181,6 @@
 			path = Job;
 			sourceTree = "<group>";
 		};
-		E4048C8916F92101008E409D /* CocoaAsyncSocket */ = {
-			isa = PBXGroup;
-			children = (
-				E4048C8A16F92101008E409D /* GCDAsyncSocket.h */,
-				E4048C8B16F92101008E409D /* GCDAsyncSocket.m */,
-				E4048C8C16F92101008E409D /* GCDAsyncUdpSocket.h */,
-				E4048C8D16F92101008E409D /* GCDAsyncUdpSocket.m */,
-			);
-			path = CocoaAsyncSocket;
-			sourceTree = "<group>";
-		};
 		E40854C716ECA413003D3E50 /* TWiOSReverseAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,7 +208,6 @@
 		E41E0DC016EB8AD100310D34 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				E4048C8916F92101008E409D /* CocoaAsyncSocket */,
 				E40854CC16ECA413003D3E50 /* ABOAuthCore */,
 				E40854C716ECA413003D3E50 /* TWiOSReverseAuth */,
 			);
@@ -465,8 +447,6 @@
 				E4F7D36616ED4B5B002D51FF /* Base8NavigationBar.m in Sources */,
 				E4EEC52F16ED5956009D30BC /* ApiHelper.m in Sources */,
 				E4EEC53216ED5E1D009D30BC /* APPUserDefaultsHandler.m in Sources */,
-				E4048C8E16F92101008E409D /* GCDAsyncSocket.m in Sources */,
-				E4048C8F16F92101008E409D /* GCDAsyncUdpSocket.m in Sources */,
 				E401902316FA51C20089FBD3 /* Job.m in Sources */,
 				E401902916FB81E80089FBD3 /* UdpTest.m in Sources */,
 				E4EADB9C16FBACDD00F99C12 /* DownloadTest.m in Sources */,
