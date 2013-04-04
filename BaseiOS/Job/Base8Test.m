@@ -10,7 +10,7 @@
 
 @implementation Base8Test
 
-- (id)initWithDelegate:(id<TestDelegate>)delegate andNumberOfTests:(int)numberOfTests
+- (id)initWithDelegate:(id<TestJobDelegate>)delegate andNumberOfTests:(int)numberOfTests
 {
     if (self = [super init]) {
         self.testDelegate = delegate;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Job.h"
+#import "TestJob.h"
 
 @interface MainViewController : UIViewController <JobDelegate>
 

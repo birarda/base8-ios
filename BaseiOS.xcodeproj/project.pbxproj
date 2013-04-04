@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6503856A235742DFBC0B28B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A98F6DB6B0B4EF48D6F0687 /* libPods.a */; settings = {}; };
+		538064C2170E0101007EC0E2 /* TestJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 538064C1170E0101007EC0E2 /* TestJob.m */; };
+		6503856A235742DFBC0B28B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A98F6DB6B0B4EF48D6F0687 /* libPods.a */; };
 		E401902316FA51C20089FBD3 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902216FA51C20089FBD3 /* Job.m */; };
 		E401902916FB81E80089FBD3 /* UdpTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E401902816FB81E80089FBD3 /* UdpTest.m */; };
 		E4048C9116F92371008E409D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4048C9016F92371008E409D /* Security.framework */; };
@@ -61,7 +62,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A98F6DB6B0B4EF48D6F0687 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A98F6DB6B0B4EF48D6F0687 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		538064C0170E0101007EC0E2 /* TestJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestJob.h; sourceTree = "<group>"; };
+		538064C1170E0101007EC0E2 /* TestJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJob.m; sourceTree = "<group>"; };
 		DDCADDF4A62B45A58EB60DD1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E401902116FA51C20089FBD3 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
 		E401902216FA51C20089FBD3 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				E4EADB9E16FBAD0600F99C12 /* Base8Test.m */,
 				E4C821F216FBC3ED00E7C7ED /* UploadTest.h */,
 				E4C821F316FBC3ED00E7C7ED /* UploadTest.m */,
+				538064C0170E0101007EC0E2 /* TestJob.h */,
+				538064C1170E0101007EC0E2 /* TestJob.m */,
 			);
 			path = Job;
 			sourceTree = "<group>";
@@ -374,8 +379,6 @@
 			mainGroup = E4A0A4C916EA92F300490F08;
 			productRefGroup = E4A0A4D316EA92F300490F08 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
 				E4A0A4D116EA92F300490F08 /* Base 8 */,
@@ -424,7 +427,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 1;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -452,6 +454,7 @@
 				E4EADB9C16FBACDD00F99C12 /* DownloadTest.m in Sources */,
 				E4EADB9F16FBAD0600F99C12 /* Base8Test.m in Sources */,
 				E4C821F416FBC3ED00E7C7ED /* UploadTest.m in Sources */,
+				538064C2170E0101007EC0E2 /* TestJob.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

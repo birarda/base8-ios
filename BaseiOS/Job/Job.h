@@ -6,18 +6,6 @@
 //  Copyright (c) 2013 HighFidelity.io. All rights reserved.
 //
 
-@protocol TestDelegate
-
-@property (strong, nonatomic) id testData;
-
-@optional
-- (void)onTestError:(NSError *)error;
-- (void)test:(id)test didFinishWithTime:(int)average;
-- (void)test:(id)test didFinishWithDeviceTime:(int)deviceAverage andServerTime:(int)serverAverage;
-- (void)test:(id)test didFinishWithError:(NSError *)error;
-
-@end
-
 @protocol JobDelegate
 
 @optional
@@ -27,7 +15,9 @@
 
 @end
 
-@interface Job : NSObject <TestDelegate>
+@interface Job : NSObject
+
+@property (nonatomic) id<JobDelegate> delegate;
 
 - (id)initWithDelegate:(id<JobDelegate>)delegate;
 - (void)start;

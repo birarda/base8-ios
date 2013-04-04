@@ -12,9 +12,9 @@
 @interface MainViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *labelBalance;
-@property (weak, nonatomic) IBOutlet UIButton *buttonStartJob;
+@property (weak, nonatomic) IBOutlet UIButton *buttonTestConnection;
+@property (weak, nonatomic) IBOutlet UIButton *buttonStartAssignment;
 @property (weak, nonatomic) IBOutlet UITextView *textViewLog;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorJob;
 
 @end
 
@@ -33,10 +33,9 @@
     labelNavTitle.backgroundColor = [UIColor clearColor];
 
     labelNavTitle.textAlignment = NSTextAlignmentLeft;
-    Customer *currentCustomer = AppUserDefaultsHandler.currentCustomer;
 
-    if (currentCustomer) {
-        labelNavTitle.text = [NSString stringWithFormat:@"@%@", currentCustomer.twitterName];
+    if (AppUserDefaultsHandler.currentCustomer) {
+        labelNavTitle.text = [NSString stringWithFormat:@"@%@", AppUserDefaultsHandler.currentCustomer.twitterName];
         
         CLLocation *userLocation = [Base8AppDelegate locationManager].location;
         if (!userLocation) {
@@ -92,14 +91,13 @@
     [Base8AppDelegate signOut];
 }
 
-- (IBAction)startJobTapped:(UIButton *)sender
+- (IBAction)testConnectionTapped:(UIButton *)sender
 {
     self.textViewLog.text = @"";
     sender.enabled = NO;
-    Job *job = [[Job alloc] initWithDelegate:self];
-    [job start];
-    [self.indicatorJob startAnimating];
-    self.buttonStartJob.alpha = 0;
+    TestJob *testJob = [[TestJob alloc] initWithDelegate:self];
+    [testJob start];
+    self.buttonTestConnection.alpha = 0;
 }
 
 -(void)logCall:(NSString *)logLine
@@ -111,9 +109,8 @@
 -(void)didFinish:(NSString *)status
 {
     [self logCall:status];
-    self.buttonStartJob.enabled = YES;
-    self.buttonStartJob.alpha = 1;
-    [self.indicatorJob stopAnimating];
+    self.buttonTestConnection.enabled = YES;
+    self.buttonTestConnection.alpha = 1;
     
     [AppUserDefaultsHandler getCustomerBalance];
 
@@ -127,7 +124,7 @@
 
 - (void)onError:(NSError *)error
 {
-    self.buttonStartJob.enabled = YES;
+    self.buttonTestConnection.enabled = YES;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:error.localizedDescription
                                                    delegate:nil
