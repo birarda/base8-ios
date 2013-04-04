@@ -26,7 +26,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="color" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Authenticatiing with Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="52M-rz-jt3">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Authenticating with Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="52M-rz-jt3">
                                                 <rect key="frame" x="45" y="10" width="218" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -171,6 +171,29 @@
         <image name="button.png" width="256" height="46"/>
         <image name="globe.png" width="237" height="237"/>
     </resources>
+    <classes>
+        <class className="Base8NavigationBar" superclassName="UINavigationBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/Base8NavigationBar.h"/>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="buttonLogoutTapped:"/>
+                <relationship kind="action" name="testConnectionTapped:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonStartAssignment" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonTestConnection" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="labelBalance" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="textViewLog" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="TwitterLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterLoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityLogin" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="buttonLogin" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
