@@ -48,16 +48,14 @@ NSString* const kCurrentCustomer = @"loggedCustomer";
 
 + (Customer *)currentCustomer
 {
+    Customer *customer;
+
     if (DEFAULTS(object, kCurrentCustomer)) {
-        
         NSData *myEncodedObject = DEFAULTS(object, kCurrentCustomer);
-        Customer *customer = (Customer *)[NSKeyedUnarchiver unarchiveObjectWithData:myEncodedObject];
-        if (!customer) {
-            return nil;
-        }
-        return customer;
+        customer = (Customer *)[NSKeyedUnarchiver unarchiveObjectWithData:myEncodedObject];
     }
-    return nil;
+    
+    return customer;
 }
 
 @end
