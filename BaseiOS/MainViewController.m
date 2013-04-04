@@ -94,10 +94,27 @@
 - (IBAction)testConnectionTapped:(UIButton *)sender
 {
     self.textViewLog.text = @"";
-    sender.enabled = NO;
+    
+    [self replaceButtonWithSpinner:sender];
+    
     TestJob *testJob = [[TestJob alloc] initWithDelegate:self];
     [testJob start];
-    self.buttonTestConnection.alpha = 0;
+}
+
+#define BUTTON_SPINNER_TAG 4213
+
+- (void)replaceButtonWithSpinner:(UIButton *)button
+{
+    UIActivityIndicatorView *newSpinner = [[UIActivityIndicatorView alloc]
+                                           initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    newSpinner.center = CGPointMake(CGRectGetMaxX(button.frame) - (newSpinner.frame.size.width / 2),
+                                    CGRectGetMidY(button.frame));
+    newSpinner.tag = BUTTON_SPINNER_TAG;
+    [newSpinner startAnimating];
+    [newSpinner setColor:[UIColor blackColor]];
+    [self.view addSubview:newSpinner];
+    
+    button.hidden = YES;
 }
 
 -(void)logCall:(NSString *)logLine
@@ -109,8 +126,9 @@
 -(void)didFinish:(NSString *)status
 {
     [self logCall:status];
-    self.buttonTestConnection.enabled = YES;
-    self.buttonTestConnection.alpha = 1;
+    
+    self.buttonTestConnection.hidden = NO;
+    [[self.view viewWithTag:BUTTON_SPINNER_TAG] removeFromSuperview];
     
     [AppUserDefaultsHandler getCustomerBalance];
 

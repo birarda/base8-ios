@@ -78,12 +78,11 @@
     if ([test isKindOfClass:[DownloadTest class]]) {
         [self logStatus:[NSString stringWithFormat:@"average download time: %dms", average]];
     } else if ([test isKindOfClass:[UploadTest class]]) {
-        
         [self logStatus:[NSString stringWithFormat:@"average upload time: %dms", average]];
-        
-        if ([(NSObject *)self.delegate respondsToSelector:@selector(didFinish:)]) {
-            [self.delegate didFinish:@"OK"];
-        }
+    }
+    
+    if ([(NSObject *)self.delegate respondsToSelector:@selector(didFinish:)]) {
+        [self.delegate didFinish:@"OK"];
     }
 }
 

@@ -171,27 +171,6 @@
         <image name="button.png" width="256" height="46"/>
         <image name="globe.png" width="237" height="237"/>
     </resources>
-    <classes>
-        <class className="Base8NavigationBar" superclassName="UINavigationBar">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/Base8NavigationBar.h"/>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonStartAssignment" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonTestConnection" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="labelBalance" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="textViewLog" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="TwitterLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterLoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityLogin" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="buttonLogin" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
