@@ -84,6 +84,7 @@
     if (!httpClient) {
         NSURL *apiUrl = [NSURL URLWithString:kApiURL];
         httpClient = [[AFHTTPClient alloc] initWithBaseURL:apiUrl];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     }
     
     return httpClient;
