@@ -23,6 +23,15 @@
     [self httpApiCallwithMethod:@"GET" path:kStartAssignmentApiMethod parameters:nil andCompletion:completion];
 }
 
++ (void)loadAssignment:(apiCompletion)completion outputStream:(NSOutputStream *)outputStream
+{
+    AFHTTPRequestOperation *loadOperation = [self httpApiCallwithMethod:@"GET"
+                                                                   path:kLoadAssignmentApiMethod
+                                                             parameters:nil
+                                                          andCompletion:completion];
+    loadOperation.outputStream = outputStream;
+}
+
 + (void)downloadTest:(apiCompletion)completion
 {
     [self httpApiCallwithMethod:@"GET"
@@ -137,7 +146,7 @@
     [operation start];
 }
 
-+ (void)httpApiCallwithMethod:(NSString *)method
++ (AFHTTPRequestOperation *)httpApiCallwithMethod:(NSString *)method
                          path:(NSString *)apiMethod
                    parameters:(NSDictionary *)params
                 andCompletion:(apiCompletion)completion
@@ -189,6 +198,8 @@
                                     }];
 
     [[self sharedHTTPClient] enqueueHTTPRequestOperation:operation];
+    
+    return operation;
 }
 
 @end

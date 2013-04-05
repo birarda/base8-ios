@@ -20,7 +20,6 @@
 @property (nonatomic) id<JobDelegate> delegate;
 
 - (id)initWithDelegate:(id<JobDelegate>)delegate;
-- (void)start;
 - (void)repeatStatusCheck;
 
 @end

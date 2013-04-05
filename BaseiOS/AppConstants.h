@@ -14,6 +14,7 @@
 extern NSString* const kSignInApiMethod;
 extern NSString* const kCreateAssignmentApiMethod;
 extern NSString* const kStartAssignmentApiMethod;
+extern NSString* const kLoadAssignmentApiMethod;
 extern NSString* const kDownloadTestApiMethod;
 extern NSString* const kUploadTestApiMethod;
 extern NSString* const kTestEndApiMethod;

@@ -26,6 +26,7 @@ uint16_t const kUdpPort = 55110;
 NSString* const kSignInApiMethod = @"signin";
 NSString* const kCreateAssignmentApiMethod = @"create-assignment";
 NSString* const kStartAssignmentApiMethod = @"start-assignment";
+NSString* const kLoadAssignmentApiMethod = @"load-assignment";
 NSString* const kDownloadTestApiMethod = @"downloadtest";
 NSString* const kUploadTestApiMethod = @"uploadtest";
 NSString* const kTestEndApiMethod = @"test-end";
