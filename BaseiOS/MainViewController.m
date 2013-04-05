@@ -11,6 +11,8 @@
 
 @interface MainViewController ()
 
+@property (strong, nonatomic) Job *currentJob;
+
 @property (weak, nonatomic) IBOutlet UILabel *labelBalance;
 @property (weak, nonatomic) IBOutlet UIButton *buttonTestConnection;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStartAssignment;
@@ -42,6 +44,8 @@
             userLocation = [[CLLocation alloc] init];
         }
         
+        // we have a logged in user, tell the current job to start waiting
+        [self.currentJob repeatStatusCheck];        
     } else {
 
         labelNavTitle.text = @"";
@@ -53,13 +57,21 @@
     
     [self updateCustomerBalanceLabel];
     self.navigationItem.titleView = labelNavTitle;
-    self.textViewLog.text = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (Job *)currentJob
+{
+    if (!_currentJob) {
+        _currentJob = [[Job alloc] initWithDelegate:self];
+    }
+    
+    return _currentJob;
 }
 
 - (void)userStateChanged
