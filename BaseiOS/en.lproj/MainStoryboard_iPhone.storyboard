@@ -88,22 +88,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vUI-ng-gjh">
-                                <rect key="frame" x="130" y="10" width="171" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" title="Start assignment">
-                                    <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="muY-xX-f3u">
-                                <rect key="frame" x="130" y="61" width="169" height="44"/>
+                                <rect key="frame" x="131" y="13" width="169" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                 <state key="normal" title="Test connection">
@@ -120,7 +106,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="egw-oW-epo">
-                                <rect key="frame" x="20" y="112" width="281" height="372"/>
+                                <rect key="frame" x="20" y="71" width="281" height="413"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -137,7 +123,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="buttonStartAssignment" destination="vUI-ng-gjh" id="NRB-7j-cnV"/>
                         <outlet property="buttonTestConnection" destination="muY-xX-f3u" id="boW-3p-oTP"/>
                         <outlet property="labelBalance" destination="eNi-0x-Aa7" id="2mu-8y-0ti"/>
                         <outlet property="textViewLog" destination="egw-oW-epo" id="iXc-gL-32b"/>
@@ -189,6 +174,7 @@
         <class className="TwitterLoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TwitterLoginViewController.h"/>
             <relationships>
+                <relationship kind="action" name="twitterLoginTapped:"/>
                 <relationship kind="outlet" name="activityLogin" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="buttonLogin" candidateClass="UIButton"/>
             </relationships>
