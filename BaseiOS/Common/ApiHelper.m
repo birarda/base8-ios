@@ -12,6 +12,17 @@
 @implementation ApiHelper
 
 #pragma mark - API Calls
+
++ (void)createAssignment:(apiCompletion)completion
+{
+    [self httpApiCallwithMethod:@"GET" path:kCreateAssignmentApiMethod parameters:nil andCompletion:completion];
+}
+
++ (void)startAssignment:(apiCompletion)completion
+{
+    [self httpApiCallwithMethod:@"GET" path:kStartAssignmentApiMethod parameters:nil andCompletion:completion];
+}
+
 + (void)downloadTest:(apiCompletion)completion
 {
     [self httpApiCallwithMethod:@"GET"
@@ -135,7 +146,7 @@
     AFHTTPRequestOperation *operation = [[self sharedHTTPClient]
             HTTPRequestOperationWithRequest:request
                                     success:^(AFHTTPRequestOperation *requestOperation, id responseObject) {
-
+                                        
                                         if ([[requestOperation.response allHeaderFields][@"Content-Type"] isEqualToString:@"application/json"]) {
 
                                             NSError *error;

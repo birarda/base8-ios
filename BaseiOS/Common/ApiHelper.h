@@ -10,6 +10,8 @@ typedef void (^apiCompletion)(id response, NSError *error);
 
 @interface ApiHelper : NSObject
 
++ (void)createAssignment:(apiCompletion)completion;
++ (void)startAssignment:(apiCompletion)completion;
 + (void)downloadTest:(apiCompletion)completion;
 + (void)uploadTest:(id)testData andCompletion:(apiCompletion)completion;
 + (void)getTestConfigurationWithCompletion:(apiCompletion)completion;
