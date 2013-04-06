@@ -27,6 +27,7 @@ NSString* const kSignInApiMethod = @"signin";
 NSString* const kCreateAssignmentApiMethod = @"create-assignment";
 NSString* const kStartAssignmentApiMethod = @"start-assignment";
 NSString* const kLoadAssignmentApiMethod = @"load-assignment";
+NSString* const kUploadAssignmentApiMethod = @"assignment-result";
 NSString* const kDownloadTestApiMethod = @"downloadtest";
 NSString* const kUploadTestApiMethod = @"uploadtest";
 NSString* const kTestEndApiMethod = @"test-end";

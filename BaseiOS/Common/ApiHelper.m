@@ -32,6 +32,14 @@
     loadOperation.outputStream = outputStream;
 }
 
++ (void)uploadAssignment:(apiCompletion)completion resultString:(NSString *)resultString
+{
+    [self httpApiCallwithMethod:@"POST"
+                           path:kUploadAssignmentApiMethod
+                     parameters:@{@"result" : resultString}
+                  andCompletion:completion];
+}
+
 + (void)downloadTest:(apiCompletion)completion
 {
     [self httpApiCallwithMethod:@"GET"

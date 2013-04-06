@@ -44,7 +44,7 @@
                                                            userInfo:nil
                                                             repeats:YES];
         [self logStatus:@"Waiting for assignment..."];
-    }    
+    }
 }
 
 - (void)checkStatus
@@ -70,7 +70,9 @@
 - (void)download
 {
     [self logStatus:@"Downloading assignment..."];
+    
     [self.jobWaitTimer invalidate];
+    self.jobWaitTimer = nil;
     
     self.assignmentData = nil;
     NSOutputStream *assignmentOutputStream = [NSOutputStream outputStreamToMemory];
@@ -89,10 +91,6 @@
             [self start];
         });
     } outputStream:assignmentOutputStream];
-}
-
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    
 }
 
 - (void)start
@@ -117,28 +115,53 @@
             [self.assignmentData getBytes:&secondFloat range:NSMakeRange(i + 4, 4)];
             
             averageFloat = (firstFloat + secondFloat) / 2;
+            
             numFloatsInData++;
             
             // put the average float into the NSMutableData at the position of the first
             // and remove the second, shrinking the data
             [self.assignmentData replaceBytesInRange:NSMakeRange(i, 4) withBytes:&averageFloat length:4];
             [self.assignmentData replaceBytesInRange:NSMakeRange(i + 4, 4) withBytes:NULL length:0];
-        
+            
+            [self.assignmentData getBytes:&averageFloat range:NSMakeRange(i, 4)];
         }
     } while (numFloatsInData > 100);
     
     NSLog(@"Completed averaging of floats - There are %d in the result.", numFloatsInData);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self logStatus:@"Completed assignment, sending to server."];
-    });
-    
-    [self complete];
+    [self upload];
 }
 
-- (void)complete {
-    // post the results back to the server
+- (void)upload {
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self logStatus:@"Completed assignment, sending to server..."];
+    });
+    
+    NSMutableString *resultString = [NSMutableString string];
+    
+    int stringIndex = 0;
+    NSString *thisFloatString;
+    Float32 thisFloat = 0;
+    
+    for (int i = 0; i < self.assignmentData.length; i += 4) {
+        // add the float at this position to the float string
+        [self.assignmentData getBytes:&thisFloat range:NSMakeRange(i, 4)];
+        thisFloatString = [NSString stringWithFormat:@"%.4f", thisFloat];
+        
+        [resultString insertString:thisFloatString atIndex:stringIndex];
+        
+        stringIndex += thisFloatString.length;
+    }
+    
+    // post the results back to the server
+    [ApiHelper uploadAssignment:^(id response, NSError *error) {
+        if (!error) {
+            // we need to start a timer to check the assignment status
+        } else {
+            NSLog(@"Error uploading assignment: %@", error.localizedDescription);
+        }
+    } resultString:resultString];
 }
 
 - (void)logStatus:(NSString *)logLine
