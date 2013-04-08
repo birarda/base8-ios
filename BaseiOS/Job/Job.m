@@ -176,18 +176,13 @@
 
 - (void)checkStatus
 {
-    [ApiHelper getBalance:^(id response, NSError *error) {
-        
-        int awardValue = ![response[@"award"] isEqual:[NSNull null]]
-            ? [response[@"award"] integerValue]
-            : 0;
-        
-        if (awardValue > 0) {
+    [ApiHelper getBalance:^(id response, NSError *error) {        
+        if (![response[@"award"] isEqual:[NSNull null]]) {
             [self stopPolling];
             
             // tell the delegate that the assignment completed successfully
             if ([(NSObject *)self.delegate respondsToSelector:@selector(didFinish:)]) {
-                NSString *assignmentSuccess = [NSString stringWithFormat:@"You have been awarded with %d pc", awardValue];
+                NSString *assignmentSuccess = [NSString stringWithFormat:@"You have been awarded with %@ pc", response[@"award"]];
                 [self.delegate didFinish:assignmentSuccess];
             }
         } else if (++self.assignmentAwardCheckCount > MAX_ASSIGNMENT_AWARD_CHECKS) {
