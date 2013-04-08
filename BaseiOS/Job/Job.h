@@ -21,6 +21,6 @@
 
 - (id)initWithDelegate:(id<JobDelegate>)delegate;
 - (void)start;
-- (void)repeatStatusCheck;
+- (void)startWaiting;
 
 @end

@@ -8,12 +8,13 @@
 
 #import "Job.h"
 
-#define STATUS_CHECK_INTERVAL_SECONDS 5
+#define POLL_INTERVAL_SECONDS 5
 
 @interface Job() <NSStreamDelegate>
 
-@property (strong, nonatomic) NSTimer *jobWaitTimer;
+@property (strong, nonatomic) NSTimer *pollTimer;
 @property (strong, nonatomic) NSMutableData *assignmentData;
+@property (strong, nonatomic) NSString *currentAssignmentHash;
 
 @end
 
@@ -35,19 +36,19 @@
     }];
 }
 
-- (void)repeatStatusCheck
+- (void)startWaiting
 {
-    if (!self.jobWaitTimer) {
-        self.jobWaitTimer = [NSTimer scheduledTimerWithTimeInterval:STATUS_CHECK_INTERVAL_SECONDS
+    if (!self.pollTimer) {
+        self.pollTimer = [NSTimer scheduledTimerWithTimeInterval:POLL_INTERVAL_SECONDS
                                                              target:self
-                                                           selector:@selector(checkStatus)
+                                                           selector:@selector(createOrWaitForWorking)
                                                            userInfo:nil
                                                             repeats:YES];
         [self logStatus:@"Waiting for assignment..."];
     }
 }
 
-- (void)checkStatus
+- (void)createOrWaitForWorking
 {
     [ApiHelper startAssignment:^(id response, NSError *error) {
         if (!error) {
@@ -57,7 +58,7 @@
                         NSLog(@"Error creating assignment: %@", error.localizedDescription);
                     }
                 }];
-            } else if ([response[@"message"] isEqualToString:@"working"]) {
+            } else if ([response[@"message"] isEqualToString:@"pending"]) {
                 NSLog(@"Received assignment: %@", response);
                 [self download];
             }
@@ -71,26 +72,16 @@
 {
     [self logStatus:@"Downloading assignment..."];
     
-    [self.jobWaitTimer invalidate];
-    self.jobWaitTimer = nil;
-    
-    self.assignmentData = nil;
-    NSOutputStream *assignmentOutputStream = [NSOutputStream outputStreamToMemory];
-    assignmentOutputStream.delegate = self;
-    [assignmentOutputStream scheduleInRunLoop:[NSRunLoop currentRunLoop]
-                                      forMode:NSDefaultRunLoopMode];
-    [assignmentOutputStream open];
-    
+    [self.pollTimer invalidate];
+    self.pollTimer = nil;
+
     [ApiHelper loadAssignment:^(id response, NSError *error) {
-        [assignmentOutputStream close];
-        [assignmentOutputStream removeFromRunLoop:[NSRunLoop currentRunLoop]
-                                          forMode:NSDefaultRunLoopMode];
-        self.assignmentData = [assignmentOutputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+        self.assignmentData = response;
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [self start];
         });
-    } outputStream:assignmentOutputStream];
+    } outputStream:nil];
 }
 
 - (void)start
@@ -107,9 +98,10 @@
     do {
         numFloatsInData = 0;
         
+        // pull out the next two floats
+        Float32 firstFloat = 0, secondFloat = 0, averageFloat = 0;
+        
         for (int i = 0; i < self.assignmentData.length - 4; i += 4) {
-            // pull out the next two floats
-            Float32 firstFloat, secondFloat, averageFloat;
             
             [self.assignmentData getBytes:&firstFloat range:NSMakeRange(i, 4)];
             [self.assignmentData getBytes:&secondFloat range:NSMakeRange(i + 4, 4)];
@@ -122,9 +114,8 @@
             // and remove the second, shrinking the data
             [self.assignmentData replaceBytesInRange:NSMakeRange(i, 4) withBytes:&averageFloat length:4];
             [self.assignmentData replaceBytesInRange:NSMakeRange(i + 4, 4) withBytes:NULL length:0];
-            
-            [self.assignmentData getBytes:&averageFloat range:NSMakeRange(i, 4)];
         }
+        
     } while (numFloatsInData > 100);
     
     NSLog(@"Completed averaging of floats - There are %d in the result.", numFloatsInData);
@@ -153,15 +144,34 @@
         
         stringIndex += thisFloatString.length;
     }
+
     
     // post the results back to the server
     [ApiHelper uploadAssignment:^(id response, NSError *error) {
         if (!error) {
             // we need to start a timer to check the assignment status
+            self.currentAssignmentHash = response[@"assignment"][@"jobHash"];
+            [self repeatStatusCheck];
         } else {
             NSLog(@"Error uploading assignment: %@", error.localizedDescription);
         }
     } resultString:resultString];
+}
+
+- (void)repeatStatusCheck
+{
+    self.pollTimer = [NSTimer scheduledTimerWithTimeInterval:POLL_INTERVAL_SECONDS
+                                                      target:self
+                                                    selector:@selector(checkStatus)
+                                                    userInfo:nil
+                                                     repeats:YES];
+}
+
+- (void)checkStatus
+{
+    [ApiHelper getBalance:^(id response, NSError *error) {
+        NSLog(@"The balance - %@", response);
+    } optionalAssignmentHash:self.currentAssignmentHash];
 }
 
 - (void)logStatus:(NSString *)logLine

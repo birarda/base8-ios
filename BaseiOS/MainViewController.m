@@ -45,7 +45,7 @@
         }
         
         // we have a logged in user, tell the current job to start waiting
-        [self.currentJob repeatStatusCheck];        
+        [self.currentJob startWaiting];        
     } else {
 
         labelNavTitle.text = @"";

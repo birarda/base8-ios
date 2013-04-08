@@ -15,7 +15,7 @@
 
 + (void)createAssignment:(apiCompletion)completion
 {
-    [self httpApiCallwithMethod:@"GET" path:kCreateAssignmentApiMethod parameters:nil andCompletion:completion];
+    [self httpApiCallwithMethod:@"POST" path:kCreateAssignmentApiMethod parameters:nil andCompletion:completion];
 }
 
 + (void)startAssignment:(apiCompletion)completion
@@ -25,11 +25,10 @@
 
 + (void)loadAssignment:(apiCompletion)completion outputStream:(NSOutputStream *)outputStream
 {
-    AFHTTPRequestOperation *loadOperation = [self httpApiCallwithMethod:@"GET"
-                                                                   path:kLoadAssignmentApiMethod
-                                                             parameters:nil
-                                                          andCompletion:completion];
-    loadOperation.outputStream = outputStream;
+    [self httpApiCallwithMethod:@"GET"
+                           path:kLoadAssignmentApiMethod
+                     parameters:nil
+                  andCompletion:completion];
 }
 
 + (void)uploadAssignment:(apiCompletion)completion resultString:(NSString *)resultString
@@ -70,9 +69,15 @@
                   andCompletion:completion];
 }
 
-+ (void)getBalance:(apiCompletion)completion
++ (void)getBalance:(apiCompletion)completion optionalAssignmentHash:(NSString *)optionalAssignmentHash
 {
-    [self jsonAPICall:kGetBalanceApiMethod withParams:nil andCompletion:completion];
+    NSString *balancePath = kGetBalanceApiMethod;
+    
+    if (optionalAssignmentHash) {
+        [balancePath stringByAppendingString:[NSString stringWithFormat:@"%@", optionalAssignmentHash]];
+    }
+    
+    [self jsonAPICall:balancePath withParams:nil andCompletion:completion];
 }
 
 + (void)setTestFail:(apiCompletion)completion
@@ -154,7 +159,7 @@
     [operation start];
 }
 
-+ (AFHTTPRequestOperation *)httpApiCallwithMethod:(NSString *)method
++ (void)httpApiCallwithMethod:(NSString *)method
                          path:(NSString *)apiMethod
                    parameters:(NSDictionary *)params
                 andCompletion:(apiCompletion)completion
@@ -206,8 +211,6 @@
                                     }];
 
     [[self sharedHTTPClient] enqueueHTTPRequestOperation:operation];
-    
-    return operation;
 }
 
 @end
