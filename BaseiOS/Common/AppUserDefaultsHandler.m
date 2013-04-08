@@ -41,7 +41,7 @@ NSString* const kCurrentCustomer = @"loggedCustomer";
                     [AppUserDefaultsHandler setCurrentCustomer:customer];
                 }
             }
-        } optionalAssignmentHash:nil];
+        } optionalJobID:nil];
     }
 }
 

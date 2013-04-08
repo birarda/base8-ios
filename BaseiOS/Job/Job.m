@@ -14,7 +14,6 @@
 
 @property (strong, nonatomic) NSTimer *pollTimer;
 @property (strong, nonatomic) NSMutableData *assignmentData;
-@property (strong, nonatomic) NSString *currentAssignmentHash;
 
 @end
 
@@ -58,7 +57,7 @@
                         NSLog(@"Error creating assignment: %@", error.localizedDescription);
                     }
                 }];
-            } else if ([response[@"message"] isEqualToString:@"pending"]) {
+            } else if ([response[@"message"] isEqualToString:@"pending"]) {                
                 NSLog(@"Received assignment: %@", response);
                 [self download];
             }
@@ -149,8 +148,10 @@
     // post the results back to the server
     [ApiHelper uploadAssignment:^(id response, NSError *error) {
         if (!error) {
+            int jobID = [response[@"assignment"][@"jobId"] intValue];
+            self.identifier = @(jobID);
+            
             // we need to start a timer to check the assignment status
-            self.currentAssignmentHash = response[@"assignment"][@"jobHash"];
             [self repeatStatusCheck];
         } else {
             NSLog(@"Error uploading assignment: %@", error.localizedDescription);
@@ -171,7 +172,7 @@
 {
     [ApiHelper getBalance:^(id response, NSError *error) {
         NSLog(@"The balance - %@", response);
-    } optionalAssignmentHash:self.currentAssignmentHash];
+    } optionalJobID:self.identifier];
 }
 
 - (void)logStatus:(NSString *)logLine

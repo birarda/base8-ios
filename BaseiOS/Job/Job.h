@@ -17,6 +17,7 @@
 
 @interface Job : NSObject
 
+@property (strong, nonatomic) NSNumber *identifier;
 @property (nonatomic) id<JobDelegate> delegate;
 
 - (id)initWithDelegate:(id<JobDelegate>)delegate;

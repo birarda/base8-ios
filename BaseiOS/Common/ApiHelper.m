@@ -69,12 +69,12 @@
                   andCompletion:completion];
 }
 
-+ (void)getBalance:(apiCompletion)completion optionalAssignmentHash:(NSString *)optionalAssignmentHash
++ (void)getBalance:(apiCompletion)completion optionalJobID:(NSNumber *)optionalJobID
 {
     NSString *balancePath = kGetBalanceApiMethod;
     
-    if (optionalAssignmentHash) {
-        [balancePath stringByAppendingString:[NSString stringWithFormat:@"%@", optionalAssignmentHash]];
+    if (optionalJobID) {
+        balancePath = [balancePath stringByAppendingString:[NSString stringWithFormat:@"/%@", optionalJobID]];
     }
     
     [self jsonAPICall:balancePath withParams:nil andCompletion:completion];

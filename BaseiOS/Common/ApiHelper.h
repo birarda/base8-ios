@@ -19,7 +19,7 @@ typedef void (^apiCompletion)(id response, NSError *error);
 + (void)getTestConfigurationWithCompletion:(apiCompletion)completion;
 + (void)setTestFail:(apiCompletion)completion;
 + (void)finishJob:(NSArray *)testData withCompletion:(apiCompletion)completion;
-+ (void)getBalance:(apiCompletion)completion optionalAssignmentHash:(NSString *)optionalAssignmentHash;
++ (void)getBalance:(apiCompletion)completion optionalJobID:(NSNumber *)optionalJobID;
 + (void)signInWithTwitterData:(NSDictionary *)twitterData
                 andCompletion:(apiCompletion)completion;
 
