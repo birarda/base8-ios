@@ -109,6 +109,10 @@
     
     [self replaceButtonWithSpinner:sender];
     
+    if (self.currentJob) {
+        [self.currentJob stop];
+    }
+    
     TestJob *testJob = [[TestJob alloc] initWithDelegate:self];
     [testJob start];
 }
@@ -137,30 +141,40 @@
 #pragma mark JobDelegate
 -(void)didFinish:(NSString *)status
 {
-    [self logCall:status];
+    if (self.buttonTestConnection.hidden) {
+        self.buttonTestConnection.hidden = NO;
+        [[self.view viewWithTag:BUTTON_SPINNER_TAG] removeFromSuperview];
+    }
     
-    self.buttonTestConnection.hidden = NO;
-    [[self.view viewWithTag:BUTTON_SPINNER_TAG] removeFromSuperview];
     
     [AppUserDefaultsHandler getCustomerBalance];
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Job done"
-                                                    message:@"You have been credited with 1PC"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Assignment Complete"
+                                                    message:status
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+    
+    self.textViewLog.text = @"";
+    [self.currentJob startWaiting];
 }
 
 - (void)onError:(NSError *)error
 {
-    self.buttonTestConnection.enabled = YES;
+    if (self.buttonTestConnection.hidden) {
+        self.buttonTestConnection.hidden = NO;
+    }
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:error.localizedDescription
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+    
+    self.textViewLog.text = @"";
+    [self.currentJob startWaiting];
 }
 
 - (void)onJobLog:(NSString *)logLine

@@ -83,7 +83,7 @@
         [self logStatus:[NSString stringWithFormat:@"average upload time: %dms", average]];
         
         if ([(NSObject *)self.delegate respondsToSelector:@selector(didFinish:)]) {
-            [self.delegate didFinish:@"OK"];
+            [self.delegate didFinish:@"You have been credited with 1PC"];
         }
     }
 }

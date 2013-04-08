@@ -158,6 +158,8 @@
             [self repeatStatusCheck];
         } else {
             NSLog(@"Error uploading assignment: %@", error.localizedDescription);
+            
+            [self sendDelegateCustomErrorWithMessage:@"There was a problem uploading the completed assignment."];
         }
     } resultString:resultString];
 }
@@ -185,8 +187,7 @@
             
             // tell the delegate that the assignment completed successfully
             if ([(NSObject *)self.delegate respondsToSelector:@selector(didFinish:)]) {
-                NSString *assignmentSuccess = [NSString stringWithFormat:@"Assignment completed. "
-                                               "You have been awarded with %d pc", awardValue];
+                NSString *assignmentSuccess = [NSString stringWithFormat:@"You have been awarded with %d pc", awardValue];
                 [self.delegate didFinish:assignmentSuccess];
             }
         } else if (++self.assignmentAwardCheckCount > MAX_ASSIGNMENT_AWARD_CHECKS) {
@@ -196,16 +197,9 @@
             [self stopPolling];
             
             // tell our delegate that the test finished in error
-            
-            if ([(NSObject*)self.delegate respondsToSelector:@selector(onError:)]) {
-                NSString *assignmentErrorString = @"Assignment completed, but you haven't been awarded due to incomplete "
-                                                  "or different assignment results from other client(s)";
-                NSError *assignmentError = [NSError errorWithDomain:@"co.highfidelity.base8"
-                                                               code:0
-                                                           userInfo:@{NSLocalizedDescriptionKey: assignmentErrorString}];
-                
-                [self.delegate onError:assignmentError];
-            }
+            NSString *assignmentErrorString = @"Assignment completed, but you haven't been awarded due to incomplete "
+                "or different assignment results from other client(s)";
+            [self sendDelegateCustomErrorWithMessage:assignmentErrorString];
         }
         
     } optionalJobID:self.identifier];
@@ -218,11 +212,28 @@
     }
 }
 
+- (void)stop
+{
+    [self stopPolling];
+}
+
 - (void)stopPolling
 {
     // stop the poll timer
     [self.pollTimer invalidate];
     self.pollTimer = nil;
+}
+
+- (void)sendDelegateCustomErrorWithMessage:(NSString *)message
+{
+    if ([(NSObject*)self.delegate respondsToSelector:@selector(onError:)]) {
+        NSString *assignmentErrorString = message;
+        NSError *assignmentError = [NSError errorWithDomain:@"co.highfidelity.base8"
+                                                       code:0
+                                                   userInfo:@{NSLocalizedDescriptionKey: assignmentErrorString}];
+        
+        [self.delegate onError:assignmentError];
+    }
 }
 
 @end

@@ -22,4 +22,6 @@
 
 @interface TestJob : Job <TestJobDelegate>
 
+- (void)start;
+
 @end
