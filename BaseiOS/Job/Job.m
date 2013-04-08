@@ -9,11 +9,14 @@
 #import "Job.h"
 
 #define POLL_INTERVAL_SECONDS 5
+#define FLOAT_FORMAT_STRING @"%.4f"
+#define MAX_ASSIGNMENT_AWARD_CHECKS 5
 
 @interface Job() <NSStreamDelegate>
 
 @property (strong, nonatomic) NSTimer *pollTimer;
 @property (strong, nonatomic) NSMutableData *assignmentData;
+@property (nonatomic) int assignmentAwardCheckCount;
 
 @end
 
@@ -137,7 +140,7 @@
     for (int i = 0; i < self.assignmentData.length; i += 4) {
         // add the float at this position to the float string
         [self.assignmentData getBytes:&thisFloat range:NSMakeRange(i, 4)];
-        thisFloatString = [NSString stringWithFormat:@"%.4f", thisFloat];
+        thisFloatString = [NSString stringWithFormat:FLOAT_FORMAT_STRING, thisFloat];
         
         [resultString insertString:thisFloatString atIndex:stringIndex];
         
@@ -161,6 +164,7 @@
 
 - (void)repeatStatusCheck
 {
+    self.assignmentAwardCheckCount = 0;
     self.pollTimer = [NSTimer scheduledTimerWithTimeInterval:POLL_INTERVAL_SECONDS
                                                       target:self
                                                     selector:@selector(checkStatus)
@@ -171,7 +175,39 @@
 - (void)checkStatus
 {
     [ApiHelper getBalance:^(id response, NSError *error) {
-        NSLog(@"The balance - %@", response);
+        
+        int awardValue = ![response[@"award"] isEqual:[NSNull null]]
+            ? [response[@"award"] integerValue]
+            : 0;
+        
+        if (awardValue > 0) {
+            [self stopPolling];
+            
+            // tell the delegate that the assignment completed successfully
+            if ([(NSObject *)self.delegate respondsToSelector:@selector(didFinish:)]) {
+                NSString *assignmentSuccess = [NSString stringWithFormat:@"Assignment completed. "
+                                               "You have been awarded with %d pc", awardValue];
+                [self.delegate didFinish:assignmentSuccess];
+            }
+        } else if (++self.assignmentAwardCheckCount > MAX_ASSIGNMENT_AWARD_CHECKS) {
+            // this isn't the right way to verify completion of assignment
+            // but it matches the way the web does it for now
+            
+            [self stopPolling];
+            
+            // tell our delegate that the test finished in error
+            
+            if ([(NSObject*)self.delegate respondsToSelector:@selector(onError:)]) {
+                NSString *assignmentErrorString = @"Assignment completed, but you haven't been awarded due to incomplete "
+                                                  "or different assignment results from other client(s)";
+                NSError *assignmentError = [NSError errorWithDomain:@"co.highfidelity.base8"
+                                                               code:0
+                                                           userInfo:@{NSLocalizedDescriptionKey: assignmentErrorString}];
+                
+                [self.delegate onError:assignmentError];
+            }
+        }
+        
     } optionalJobID:self.identifier];
 }
 
@@ -182,14 +218,11 @@
     }
 }
 
-- (void)test:(id)test didFinishWithError:(NSError *)error
+- (void)stopPolling
 {
-    [ApiHelper setTestFail:^(NSDictionary *json, NSError *apiError) {
-        if ([(NSObject*)self.delegate respondsToSelector:@selector(onError:)]) {
-            [self.delegate onError:error];
-        }
-        [self logStatus:[NSString stringWithFormat:@"Error occurred: %@", error.localizedDescription]];
-    }];
+    // stop the poll timer
+    [self.pollTimer invalidate];
+    self.pollTimer = nil;
 }
 
 @end

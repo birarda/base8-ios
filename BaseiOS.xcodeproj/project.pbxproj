@@ -542,6 +542,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DDCADDF4A62B45A58EB60DD1 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Birarda (5E4MDF95MH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -550,6 +552,8 @@
 				GCC_PREFIX_HEADER = "BaseiOS/BaseiOS-Prefix.pch";
 				INFOPLIST_FILE = "BaseiOS/BaseiOS-Info.plist";
 				PRODUCT_NAME = "Base 8";
+				PROVISIONING_PROFILE = "96A5B2CA-A5E3-4289-9B23-3FBC7F62803B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96A5B2CA-A5E3-4289-9B23-3FBC7F62803B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -558,6 +562,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DDCADDF4A62B45A58EB60DD1 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Birarda (5E4MDF95MH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -566,6 +572,8 @@
 				GCC_PREFIX_HEADER = "BaseiOS/BaseiOS-Prefix.pch";
 				INFOPLIST_FILE = "BaseiOS/BaseiOS-Info.plist";
 				PRODUCT_NAME = "Base 8";
+				PROVISIONING_PROFILE = "96A5B2CA-A5E3-4289-9B23-3FBC7F62803B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96A5B2CA-A5E3-4289-9B23-3FBC7F62803B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
