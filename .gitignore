@@ -15,4 +15,5 @@ DerivedData
 *.orig
 .idea
 .DS_Store
+*.xcworkspace
 Pods/
