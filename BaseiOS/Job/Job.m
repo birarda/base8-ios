@@ -151,6 +151,8 @@
     // post the results back to the server
     [ApiHelper uploadAssignment:^(id response, NSError *error) {
         if (!error) {
+            NSLog(@"Upload assignment response: %@", response);
+            
             int jobID = [response[@"assignment"][@"jobId"] intValue];
             self.identifier = @(jobID);
             
