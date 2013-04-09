@@ -137,10 +137,18 @@
     NSString *thisFloatString;
     Float32 thisFloat = 0;
     
+    // it's possible this will have some unintended consequences across different locales
+    // requires more testing or replacement by something smarter
+    NSNumberFormatter *floatFormatter = [[NSNumberFormatter alloc] init];
+    floatFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    floatFormatter.maximumFractionDigits = 4;
+    floatFormatter.groupingSeparator = @"";
+    
     for (int i = 0; i < self.assignmentData.length; i += 4) {
         // add the float at this position to the float string
         [self.assignmentData getBytes:&thisFloat range:NSMakeRange(i, 4)];
-        thisFloatString = [NSString stringWithFormat:FLOAT_FORMAT_STRING, thisFloat];
+        thisFloatString = [floatFormatter stringFromNumber:@(thisFloat)];
+        NSLog(@"This float string: %@", thisFloatString);
         
         [resultString insertString:thisFloatString atIndex:stringIndex];
         
