@@ -100,6 +100,7 @@
 
 - (IBAction)buttonLogoutTapped:(id *)sender
 {
+    [self.currentJob stop];
     [Base8AppDelegate signOut];
 }
 
