@@ -148,7 +148,6 @@
         // add the float at this position to the float string
         [self.assignmentData getBytes:&thisFloat range:NSMakeRange(i, 4)];
         thisFloatString = [floatFormatter stringFromNumber:@(thisFloat)];
-        NSLog(@"This float string: %@", thisFloatString);
         
         [resultString insertString:thisFloatString atIndex:stringIndex];
         
